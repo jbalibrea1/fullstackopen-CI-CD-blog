@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "lint": "eslint './**/*.{js,jsx}'",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit --silent --testTimeout=30000",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit --silent",
     "front": "cross-env PORT=3000 react-scripts start",
     "start:test": "cross-env NODE_ENV=test node index.js",
     "cypress:open": "cypress open",

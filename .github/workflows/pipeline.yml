@@ -12,6 +12,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
+      - name: Hello world
+        run: echo Hello world $FIRST_NAME $middle_name $Last_Name!
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
