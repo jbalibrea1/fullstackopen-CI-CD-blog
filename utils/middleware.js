@@ -25,9 +25,9 @@ const errorHandler = (error, request, response, next) => {
     return response.status(401).json({
       error: 'invalid token',
     })
-  }else if (error.name === 'TokenExpiredError') {
+  } else if (error.name === 'TokenExpiredError') {
     return response.status(401).json({
-      error: 'token expired'
+      error: 'token expired',
     })
   }
 
@@ -39,5 +39,5 @@ const errorHandler = (error, request, response, next) => {
 module.exports = {
   requestLogger,
   unknownEndpoint,
-  errorHandler
+  errorHandler,
 }

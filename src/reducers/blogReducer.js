@@ -76,11 +76,7 @@ export const deleteBlog = (blogId, blogTitle) => {
       await blogService.deleteBlog(blogId)
       dispatch(removeBlog(blogId))
       dispatch(
-        setNotification(
-          `'${blogTitle}' deleted successfully`,
-          'success',
-          5
-        )
+        setNotification(`'${blogTitle}' deleted successfully`, 'success', 5)
       )
     } catch (error) {
       dispatch(setNotification(`cant delete ${blogTitle} blog`, 'warning', 5))

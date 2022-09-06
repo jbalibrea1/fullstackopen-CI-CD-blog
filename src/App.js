@@ -56,7 +56,7 @@ const App = () => {
         <div>
           <h1>Log in to application</h1>
           <Notification />
-          <Togglable buttonLabel="Login">
+          <Togglable buttonLabel='Login'>
             <LoginForm />
           </Togglable>
         </div>
@@ -64,8 +64,8 @@ const App = () => {
         <div>
           <NavBar>
             <div>
-              <StyledLink to="/">blogs</StyledLink>
-              <StyledLink to="/users">users</StyledLink>
+              <StyledLink to='/'>blogs</StyledLink>
+              <StyledLink to='/users'>users</StyledLink>
             </div>
             <div>
               <em>{user} logged in</em>{' '}
@@ -77,13 +77,13 @@ const App = () => {
           </div>
 
           <Routes>
-            <Route path="/" element={<BlogList />} />
-            <Route path="/users/" element={<UsersInfo />} />
+            <Route path='/' element={<BlogList />} />
+            <Route path='/users/' element={<UsersInfo />} />
             <Route
-              path="/users/:id"
+              path='/users/:id'
               element={<UserList blogUser={userMatchId} />}
             />
-            <Route path="/blogs/:id" element={<Blog blog={blogMatchId} />} />
+            <Route path='/blogs/:id' element={<Blog blog={blogMatchId} />} />
           </Routes>
         </div>
       )}

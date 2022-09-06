@@ -12,8 +12,8 @@ const userExtractor = (request, response, next) => {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
   const { id: userId } = decodedToken
-  request.userId =  userId
+  request.userId = userId
   next()
 }
 
-module.exports =  userExtractor
+module.exports = userExtractor

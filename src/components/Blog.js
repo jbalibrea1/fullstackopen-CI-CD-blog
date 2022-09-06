@@ -36,18 +36,18 @@ const Blog = ({ blog }) => {
   }
 
   return (
-    <div className="blog">
+    <div className='blog'>
       <h2>blog app</h2>
       <h1>
         {blog.title} {blog.author}
       </h1>
       <div>
-        <StyledAnchor href={blog.url} target="_blank" rel="noreferrer">
+        <StyledAnchor href={blog.url} target='_blank' rel='noreferrer'>
           {blog.url}
         </StyledAnchor>
         <div>
           {blog.likes} likes
-          <Button buttonLeftMargin="20px" onClick={() => handleVote(blog)}>
+          <Button buttonLeftMargin='20px' onClick={() => handleVote(blog)}>
             add likes
           </Button>
         </div>
@@ -57,7 +57,7 @@ const Blog = ({ blog }) => {
       <h3>comments</h3>
       <Form onSubmit={handleAddComment}>
         <Input {...comment} />
-        <Button type="submit" buttonLeftMargin="20px">
+        <Button type='submit' buttonLeftMargin='20px'>
           add comment
         </Button>
       </Form>

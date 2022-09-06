@@ -29,12 +29,12 @@ const BlogForm = () => {
     <>
       <Form onSubmit={addBlog}>
         <div>
-          <Input {...title} placeholder="Title" id="blog-title"/>
-          <Input {...author} placeholder="author" id="blog-author"/>
-          <Input {...url} placeholder="Url" id="blog-url"/>
+          <Input {...title} placeholder='Title' id='blog-title' />
+          <Input {...author} placeholder='author' id='blog-author' />
+          <Input {...url} placeholder='Url' id='blog-url' />
         </div>
         <div>
-          <Button type="submit" id="blog-create">
+          <Button type='submit' id='blog-create'>
             create
           </Button>
         </div>

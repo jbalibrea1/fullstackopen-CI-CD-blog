@@ -10,15 +10,15 @@ const User = require('../models/user')
 beforeAll(async () => {
   await User.deleteMany({})
   const user = {
-    'username' : 'test',
-    'name' : 'test',
-    'password' : 'test'
+    username: 'test',
+    name: 'test',
+    password: 'test',
   }
 
   await api
     .post('/api/users')
     .send(user)
-    .expect('Content-Type',/application\/json/)
+    .expect('Content-Type', /application\/json/)
 })
 beforeEach(async () => {
   await Blog.deleteMany({})
@@ -44,9 +44,7 @@ describe('blog info', () => {
   })
 })
 describe('Add a blog', () => {
-
   test('valid token user and add blog ', async () => {
-
     const user = {
       username: 'test',
       password: 'test',
@@ -55,8 +53,7 @@ describe('Add a blog', () => {
     const userLogged = await api
       .post('/api/login')
       .send(user)
-      .expect('Content-Type',/application\/json/)
-
+      .expect('Content-Type', /application\/json/)
 
     const newBlog = {
       title: 'React patterns',
@@ -69,17 +66,14 @@ describe('Add a blog', () => {
       .post('/api/blogs')
       .send(newBlog)
       .expect(201)
-      .set('Authorization',`Bearer ${userLogged.body.token}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
       .expect('Content-Type', /application\/json/)
-
 
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
 
-    const contents = blogsAtEnd.map(n => n.title)
-    expect(contents).toContain(
-      'React patterns'
-    )
+    const contents = blogsAtEnd.map((n) => n.title)
+    expect(contents).toContain('React patterns')
   })
 
   test('create blog without title or url, error400', async () => {
@@ -90,7 +84,7 @@ describe('Add a blog', () => {
     const userLogged = await api
       .post('/api/login')
       .send(user)
-      .expect('Content-Type',/application\/json/)
+      .expect('Content-Type', /application\/json/)
 
     const newBlog = {
       author: 'Michael Chan',
@@ -100,7 +94,7 @@ describe('Add a blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
-      .set('Authorization',`Bearer ${userLogged.body.token}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
       .expect(400)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -116,7 +110,7 @@ describe('Add a blog', () => {
     const userLogged = await api
       .post('/api/login')
       .send(user)
-      .expect('Content-Type',/application\/json/)
+      .expect('Content-Type', /application\/json/)
 
     const newBlog = {
       title: 'React patterns',
@@ -127,12 +121,14 @@ describe('Add a blog', () => {
     await api
       .post('/api/blogs')
       .send(newBlog)
-      .set('Authorization',`Bearer ${userLogged.body.token}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
-    const addedBlog = await blogsAtEnd.find(blog => blog.title === 'React patterns')
+    const addedBlog = await blogsAtEnd.find(
+      (blog) => blog.title === 'React patterns'
+    )
     expect(addedBlog.likes).toBe(0)
   })
 })
@@ -146,27 +142,29 @@ describe('deletion of a blog', () => {
     const userLogged = await api
       .post('/api/login')
       .send(user)
-      .expect('Content-Type',/application\/json/)
+      .expect('Content-Type', /application\/json/)
 
     const newBlog = {
-      title:'test',
-      author:'test',
-      url:'www.test.com',
-      likes:12
+      title: 'test',
+      author: 'test',
+      url: 'www.test.com',
+      likes: 12,
     }
 
     await api
       .post('/api/blogs')
       .send(newBlog)
       .expect(201)
-      .set('Authorization',`Bearer ${userLogged.body.token}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[blogsAtStart.length -1]
+    const blogToDelete = blogsAtStart[blogsAtStart.length - 1]
 
-
-    await api.delete(`/api/blogs/${blogToDelete.id}`).set('Authorization',`Bearer ${userLogged.body.token}`).expect(204)
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
+      .expect(204)
 
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
@@ -175,7 +173,7 @@ describe('deletion of a blog', () => {
     expect(contents).not.toContain(blogToDelete.title)
   })
 })
-describe('updated blog',() => {
+describe('updated blog', () => {
   test('updated likes from some blog with token', async () => {
     const user = {
       username: 'test',
@@ -185,7 +183,7 @@ describe('updated blog',() => {
     const userLogged = await api
       .post('/api/login')
       .send(user)
-      .expect('Content-Type',/application\/json/)
+      .expect('Content-Type', /application\/json/)
 
     const newBlog = {
       title: 'React patterns',
@@ -197,19 +195,23 @@ describe('updated blog',() => {
       .post('/api/blogs')
       .send(newBlog)
       .expect(201)
-      .set('Authorization',`Bearer ${userLogged.body.token}`)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
       .expect('Content-Type', /application\/json/)
 
     const blogsInDb = await helper.blogsInDb()
-    const testBlog = blogsInDb[blogsInDb.length-1]
+    const testBlog = blogsInDb[blogsInDb.length - 1]
 
     const defaultLikes = testBlog.likes
     testBlog.likes = defaultLikes + 13
 
-    await api.put(`/api/blogs/${testBlog.id}`).send(testBlog).set('Authorization',`Bearer ${userLogged.body.token}`).expect(200)
+    await api
+      .put(`/api/blogs/${testBlog.id}`)
+      .send(testBlog)
+      .set('Authorization', `Bearer ${userLogged.body.token}`)
+      .expect(200)
 
     const updateBlogsInDb = await helper.blogsInDb()
-    const someBlogUpdated = updateBlogsInDb[blogsInDb.length-1]
+    const someBlogUpdated = updateBlogsInDb[blogsInDb.length - 1]
 
     expect(someBlogUpdated.likes).toBe(defaultLikes + 13)
   })

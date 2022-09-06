@@ -14,10 +14,10 @@ const BlogList = () => {
   return (
     <div>
       <h2>blogs</h2>
-      <Togglable buttonLabel="create new" ref={newBlogRef}>
+      <Togglable buttonLabel='create new' ref={newBlogRef}>
         <BlogForm />
       </Togglable>
-      <UlStyle id="test-blog">
+      <UlStyle id='test-blog'>
         {blogsForSort
           .sort((a, b) => b.likes - a.likes)
           .map((blog) => (

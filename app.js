@@ -2,6 +2,7 @@ const config = require('./utils/config')
 const express = require('express')
 require('express-async-errors')
 const app = express()
+const path = require('path')
 
 const cors = require('cors')
 const logger = require('./utils/logger')
@@ -44,10 +45,11 @@ app.get('/version', (req, res) => {
 if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
   app.use('/api/testing', testingRouter)
-}
-if (process.env.NODE_ENV !== 'test') {
+} else {
+  const BUILD_PATH = path.resolve(__dirname, './build')
+  const INDEX_PATH = path.resolve(BUILD_PATH, 'index.html')
   app.use(express.static('build'))
-
+  app.get('*', (req, res) => res.sendFile(INDEX_PATH))
 }
 
 app.use(middleware.unknownEndpoint)

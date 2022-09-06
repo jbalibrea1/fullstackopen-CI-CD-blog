@@ -9,7 +9,11 @@ const Notification = (props) => {
     return null
   }
 
-  return <Alert type={type} id="notification">{msg}</Alert>
+  return (
+    <Alert type={type} id='notification'>
+      {msg}
+    </Alert>
+  )
 }
 
 const mapStateToProps = (state) => {

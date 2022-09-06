@@ -21,13 +21,17 @@ const LoginForm = () => {
   return (
     <Form onSubmit={handleLogin}>
       <div>
-        <Input {...username} placeholder="username" id="form-login-username"/>
+        <Input {...username} placeholder='username' id='form-login-username' />
       </div>
       <div>
-        <Input {...userPassword} placeholder="password" id="form-login-password"/>
+        <Input
+          {...userPassword}
+          placeholder='password'
+          id='form-login-password'
+        />
       </div>
       <div>
-        <Button type="submit" id="form-login-button">
+        <Button type='submit' id='form-login-button'>
           login
         </Button>
       </div>
