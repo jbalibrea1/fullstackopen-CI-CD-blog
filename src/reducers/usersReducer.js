@@ -6,8 +6,8 @@ const userReducer = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    setUsers(state, action) {
-      state = action.payload
+    async setUsers(state, action) {
+      state = await action.payload
       return state
     },
     reset: () => initialState,
