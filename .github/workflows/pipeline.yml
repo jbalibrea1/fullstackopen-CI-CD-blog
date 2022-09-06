@@ -7,18 +7,16 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize]
-
+env:
+  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+  PORT: ${{ secrets.PORT }}
+  TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+  SECRET: ${{ secrets.SECRET }}
+  
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Hello world
-        run: echo Hello world $FIRST_NAME $middle_name $Last_Name!
-        env:
-          MONGODB_URI: ${{ secrets.MONGODB_URI }}
-          PORT: ${{ secrets.PORT }}
-          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
-          SECRET: ${{ secrets.SECRET }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
