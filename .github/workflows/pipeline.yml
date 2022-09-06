@@ -25,11 +25,11 @@ jobs:
       - name: create env file
         run: |
           touch .env
-          echo "MONGODB_URI = ${{ secrets.MONGODB_URI }}" >> .env
-          echo "PORT = ${{ secrets.PORT }}" >> .env
-          echo "TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }}" >> .env
-          echo "SECRET = ${{ secrets.SECRET }}" >> .env
-          echo "cat .env"
+          echo MONGODB_URI = ${{ secrets.MONGODB_URI }} >> .env
+          echo PORT = ${{ secrets.PORT }} >> .env
+          echo TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }} >> .env
+          echo SECRET = ${{ secrets.SECRET }} >> .env
+          echo cat .env
           cat .env
           echo "ls -a ."
           ls -a .
