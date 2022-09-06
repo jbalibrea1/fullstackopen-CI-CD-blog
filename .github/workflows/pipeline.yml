@@ -22,6 +22,19 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build
+      - name: create env file
+        run: |
+          touch .env
+          echo "MONGODB_URI = ${{ secrets.MONGODB_URI }}" >> .env
+          echo "PORT = ${{ secrets.PORT }}" >> .env
+          echo "TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }}" >> .env
+          echo "SECRET = ${{ secrets.SECRET }}" >> .env
+          echo "cat .env"
+          cat .env
+          echo "ls -a ."
+          ls -a .
+      - name: test
+        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:

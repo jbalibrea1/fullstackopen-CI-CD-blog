@@ -75,6 +75,7 @@ describe('Blog app', function () {
       cy.contains('Title test Author test').click()
       cy.contains('Delete').click()
       cy.wait(500)
+      // eslint-disable-next-line quotes
       cy.contains("'Title test' deleted successfully")
       cy.request('GET', 'http://localhost:3003/api/blogs').then((response) => {
         expect(response.body).to.have.length(0)
