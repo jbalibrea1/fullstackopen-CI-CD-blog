@@ -12,17 +12,6 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: create env file
-        run: |
-          touch .env
-          echo "MONGODB_URI=${{ secrets.MONGODB_URI }}" >> .env
-          echo "PORT=${{ secrets.PORT }}" >> .env
-          echo "TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }}" >> .env
-          echo "SECRET=${{ secrets.SECRET }}" >> .env
-          echo "cat .env"
-          cat .env
-          echo "ls -a ."
-          ls -a .
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
@@ -33,6 +22,17 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build
+      - name: create env file
+        run: |
+          touch .env
+          echo "MONGODB_URI = ${{ secrets.MONGODB_URI }}" >> .env
+          echo "PORT = ${{ secrets.PORT }}" >> .env
+          echo "TEST_MONGODB_URI = ${{ secrets.TEST_MONGODB_URI }}" >> .env
+          echo "SECRET = ${{ secrets.SECRET }}" >> .env
+          echo "cat .env"
+          cat .env
+          echo "ls -a ."
+          ls -a .
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
